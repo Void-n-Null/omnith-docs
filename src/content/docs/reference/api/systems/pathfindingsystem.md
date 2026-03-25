@@ -8,5 +8,5 @@ sidebar:
 
 `Omnith.Ecs.Systems`
 
-Computes A* paths when an entity's PathTarget changes. Threaded: paths are computed in parallel, results applied sequentially.
+Computes A* paths when an entity's [PathTarget](/reference/api/components/pathtarget/) changes. Threaded: paths are computed in parallel, results applied sequentially.
 

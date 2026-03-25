@@ -16,7 +16,7 @@ A template for spawning entities. Defines which components to attach and how to 
 |---|---|
 | `Add``1` | Add a component with a static default value. |
 | `Add``1` | Add a component with a dynamic resolver that runs at spawn time. |
-| `AddResolver` | Add a pre-built resolver. Used by ComponentFactoryRegistry and data-driven composition. |
+| `AddResolver` | Add a pre-built resolver. Used by [ComponentFactoryRegistry](/reference/api/runtime/componentfactoryregistry/) and data-driven composition. |
 | `Extends` | Inherit all components from a parent blueprint. Child can override. |
-| `Apply` | Apply all resolvers to an entity. Called by World.Spawn. |
+| `Apply` | Apply all resolvers to an entity. Called by [World](/reference/api/runtime/world/).Spawn. |
 

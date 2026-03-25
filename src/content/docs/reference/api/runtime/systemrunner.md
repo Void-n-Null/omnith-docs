@@ -24,6 +24,6 @@ Manages registered systems: sorts by order, tracks per-system tick accumulators,
 | `Unregister` | Unregister a system by name. |
 | `Get` | Get a system by name. Returns null if not found. |
 | `SetEnabled` | Enable or disable a system by name. |
-| `TickAll` | Tick all systems. Each system executes when its accumulated time meets its TickRate. Systems with TickRate = EVENT_ONLY (-1) are skipped entirely. |
+| `TickAll` | Tick all systems. Each system executes when its accumulated time meets its TickRate. [Systems](/csharp/systems/) with TickRate = EVENT_ONLY (-1) are skipped entirely. |
 | `PrintAll` | Print all registered systems and their status. |
 

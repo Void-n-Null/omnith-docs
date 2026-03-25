@@ -14,7 +14,7 @@ Visual data for rendering. Batched by (ResourceHandle, Layer).
 
 | Name | Description |
 |---|---|
-| `ResourceHandle` | Resource handle from ResourceRegistry. Entities with the same handle share a draw call. |
+| `ResourceHandle` | Resource handle from [ResourceRegistry](/reference/api/runtime/resourceregistry/). Entities with the same handle share a draw call. |
 | `R` | Tint color. White = no tint. |
 | `G` | Tint color. White = no tint. |
 | `B` | Tint color. White = no tint. |

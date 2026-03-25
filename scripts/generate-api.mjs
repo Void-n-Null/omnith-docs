@@ -7,8 +7,8 @@
  * Run: bun run generate-api
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 'fs';
-import { join, dirname } from 'path';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, globSync } from 'fs';
+import { join, dirname, relative } from 'path';
 import { parseStringPromise } from 'xml2js';
 
 const OMNITH_ROOT = process.argv[2] || join(dirname(import.meta.dirname), '..', 'omnith');
@@ -204,6 +204,65 @@ async function main() {
     categorized.get(cat).push({ fullName, ...type });
   }
 
+  // ── Build link map ────────────────────────────────────────────────
+  // Maps display names to their URL paths for auto-linking.
+  const linkMap = new Map(); // display name -> url path
+
+  // API pages: type names -> their generated page URLs
+  for (const [cat, pages] of categorized) {
+    for (const page of pages) {
+      const slug = page.shortName.toLowerCase().replace(/[<>`,]/g, '');
+      linkMap.set(page.shortName, `/reference/api/${cat}/${slug}/`);
+    }
+  }
+
+  // Hand-written guide pages: extract titles from frontmatter
+  const DOCS_DIR = join(dirname(import.meta.dirname), 'src', 'content', 'docs');
+  const guideFiles = readdirSync(DOCS_DIR, { recursive: true })
+    .filter(f => (f.endsWith('.md') || f.endsWith('.mdx')) && !f.includes('reference/api'));
+
+  for (const file of guideFiles) {
+    const content = readFileSync(join(DOCS_DIR, file), 'utf-8');
+    const titleMatch = content.match(/^title:\s*(.+)$/m);
+    if (!titleMatch) continue;
+    const title = titleMatch[1].replace(/["']/g, '').trim();
+    const urlPath = '/' + file.replace(/\.(md|mdx)$/, '/').replace(/\/index\/$/, '/');
+    linkMap.set(title, urlPath);
+  }
+
+  console.log(`  ${linkMap.size} link targets registered`);
+
+  // Auto-link: replace known names in markdown text with links.
+  // Only links bare words, not things already inside links, code blocks, or frontmatter.
+  function autoLink(md, selfName) {
+    // Split into frontmatter + body
+    const fmMatch = md.match(/^(---\n[\s\S]*?\n---\n)([\s\S]*)$/);
+    if (!fmMatch) return md;
+    const [, frontmatter, body] = fmMatch;
+
+    let result = body;
+
+    // Sort by length descending so "EntitySpec" matches before "Entity"
+    const sortedNames = [...linkMap.keys()]
+      .filter(name => name !== selfName && name.length > 2)
+      .sort((a, b) => b.length - a.length);
+
+    for (const name of sortedNames) {
+      const url = linkMap.get(name);
+      // Match the name as a whole word, NOT inside:
+      // - markdown links [...](...) 
+      // - inline code `...`
+      // - already linked text
+      const pattern = new RegExp(
+        `(?<!\\[|\`|/|\\w)\\b(${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\b(?!\\]|\\(|\`|/|\\w)`,
+        'g'
+      );
+      result = result.replace(pattern, `[$1](${url})`);
+    }
+
+    return frontmatter + result;
+  }
+
   // Write pages per category
   let totalPages = 0;
   for (const [cat, pages] of categorized) {
@@ -255,7 +314,7 @@ async function main() {
         md += '\n';
       }
 
-      writeFileSync(join(catDir, `${slug}.md`), md);
+      writeFileSync(join(catDir, `${slug}.md`), autoLink(md, page.shortName));
       totalPages++;
       console.log(`  [${meta.label}] ${page.shortName}`);
     }
@@ -276,7 +335,7 @@ async function main() {
   }
 
   writeFileSync(join(OUT_DIR, '..', 'api-index.md'), indexMd);
-  console.log(`\nGenerated ${totalPages} API pages + index`);
+  console.log(`\nGenerated ${totalPages} API pages + index (${linkMap.size} auto-link targets)`);
 }
 
 main().catch(console.error);

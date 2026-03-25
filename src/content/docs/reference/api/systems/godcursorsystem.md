@@ -8,5 +8,5 @@ sidebar:
 
 `Omnith.Ecs.Systems`
 
-Handles god-mode cursor input. Subscribes to MouseClickEvent, sets PathTarget on all entities. Pure event-driven, no tick.
+Handles god-mode cursor input. Subscribes to MouseClickEvent, sets [PathTarget](/reference/api/components/pathtarget/) on all entities. Pure event-driven, no tick.
 

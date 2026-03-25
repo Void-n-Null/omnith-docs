@@ -8,7 +8,7 @@ sidebar:
 
 `Omnith.Data`
 
-Base class for all data specifications. A spec is a named template loaded from .data files at startup. Specs are immutable configuration -- they define what something is, not runtime state. The type key in .data files is derived from the class name by stripping "Spec" and lowercasing (EntitySpec = "entity", TerrainGenSpec = "terrainGen"). Specs support single or multi-parent inheritance via the extends field, mod patching (same ID = merge), and full replacement via the replace flag.
+Base class for all data specifications. A spec is a named template loaded from .data files at startup. [Specs](/data/specs/) are immutable configuration -- they define what something is, not runtime state. The type key in .data files is derived from the class name by stripping "Spec" and lowercasing ([EntitySpec](/reference/api/specs/entityspec/) = "entity", [TerrainGenSpec](/reference/api/specs/terraingenspec/) = "terrainGen"). [Specs](/data/specs/) support single or multi-parent inheritance via the extends field, mod patching (same ID = merge), and full replacement via the replace flag.
 
 ## Fields
 

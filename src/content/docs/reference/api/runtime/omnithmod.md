@@ -24,6 +24,6 @@ Base class for mod entry points. Modders subclass this and override the lifecycl
 | `OnSpecsLoaded` | Called after all .data files are loaded and inheritance is resolved. Use this to read specs, validate cross-references, or modify specs before the world is created. |
 | `OnInitialize` | Called after the world is created but before gameplay starts. Register systems, create blueprints, spawn initial entities. This is the primary entry point for most mods. |
 | `OnWorldReady` | Called after the world is fully populated and ready to play. All systems are registered, all entities are spawned. |
-| `OnTick` | Called every frame. Prefer registering an ISystem instead -- this exists for mods that need to hook into the frame loop outside of the ECS (UI, input handling, etc). |
+| `OnTick` | Called every frame. Prefer registering an [ISystem](/reference/api/runtime/isystem/) instead -- this exists for mods that need to hook into the frame loop outside of the ECS (UI, input handling, etc). |
 | `OnShutdown` | Called on game exit or when the mod is unloaded. Clean up any external resources. |
 

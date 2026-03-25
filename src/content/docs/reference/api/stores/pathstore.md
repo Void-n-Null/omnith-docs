@@ -8,7 +8,7 @@ sidebar:
 
 `Omnith.Sim`
 
-External storage for computed paths. Paths are variable-length lists that don't belong in ECS struct components. Entities reference paths by integer ID via their PathFollower component. Built on Store<T> with list pooling: freed paths are cleared and recycled instead of being abandoned to GC.
+External storage for computed paths. Paths are variable-length lists that don't belong in ECS struct components. Entities reference paths by integer ID via their [PathFollower](/reference/api/components/pathfollower/) component. Built on Store<T> with list pooling: freed paths are cleared and recycled instead of being abandoned to GC.
 
 ## Methods
 

@@ -8,7 +8,7 @@ sidebar:
 
 `Omnith.Data`
 
-Needs profile defining how quickly an entity's needs decay over time. Can be defined standalone and referenced by ID, or inlined inside an EntitySpec. Type key: "needs"
+Needs profile defining how quickly an entity's needs decay over time. Can be defined standalone and referenced by ID, or inlined inside an [EntitySpec](/reference/api/specs/entityspec/). Type key: "needs"
 
 ## Fields
 

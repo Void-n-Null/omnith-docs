@@ -14,7 +14,7 @@ Everything a mod needs access to. Passed to every lifecycle method. Mods should 
 
 | Name | Description |
 |---|---|
-| `RegisterSystem` | Register a system. Shorthand for Systems.Register(). |
+| `RegisterSystem` | Register a system. Shorthand for [Systems](/csharp/systems/).Register(). |
 | `RegisterComponentFactory``1` | Register a component factory so .data files can use it in "components" blocks. |
 | `RegisterSpecType``1` | Register a custom spec type key manually. Usually not needed -- spec types are auto-discovered by naming convention (FooSpec → "foo"). Use this only if your class name doesn't follow the convention. |
 

@@ -8,7 +8,7 @@ sidebar:
 
 `Omnith.Ecs`
 
-Weighted random selection of blueprints. Resolves to a single Blueprint which is then passed to World.Spawn.
+Weighted random selection of blueprints. Resolves to a single [Blueprint](/reference/api/runtime/blueprint/) which is then passed to [World](/reference/api/runtime/world/).Spawn.
 
 ## Methods
 

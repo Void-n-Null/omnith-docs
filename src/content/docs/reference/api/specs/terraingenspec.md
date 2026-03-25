@@ -14,7 +14,7 @@ Terrain generation parameters. Controls noise-based world generation including g
 
 | Name | Description |
 |---|---|
-| `Seed` | World seed for deterministic generation. |
+| `Seed` | [World](/reference/api/runtime/world/) seed for deterministic generation. |
 | `Width` | Grid width in tiles. |
 | `Height` | Grid height in tiles. |
 | `TileSize` | Tile size in pixels. |

@@ -8,13 +8,13 @@ sidebar:
 
 `Omnith.Data`
 
-Central registry for all loaded specs. Generic access by type. One inner dictionary per spec type, created on first registration. Spec type keys for .data files are auto-discovered via reflection: any non-abstract class ending in "Spec" that inherits from Spec gets registered with the "Spec" suffix stripped and lowercased. EntitySpec → "entity", NeedsSpec → "needs" Usage: registry.Get<EntitySpec>("human") registry.All<EntitySpec>() registry.TryGet<EntitySpec>("frost-nymph", out var spec)
+Central registry for all loaded specs. Generic access by type. One inner dictionary per spec type, created on first registration. [Spec](/reference/api/specs/spec/) type keys for .data files are auto-discovered via reflection: any non-abstract class ending in "[Spec](/reference/api/specs/spec/)" that inherits from [Spec](/reference/api/specs/spec/) gets registered with the "[Spec](/reference/api/specs/spec/)" suffix stripped and lowercased. [EntitySpec](/reference/api/specs/entityspec/) → "entity", [NeedsSpec](/reference/api/specs/needsspec/) → "needs" Usage: registry.Get<[EntitySpec](/reference/api/specs/entityspec/)>("human") registry.All<[EntitySpec](/reference/api/specs/entityspec/)>() registry.TryGet<[EntitySpec](/reference/api/specs/entityspec/)>("frost-nymph", out var spec)
 
 ## Methods
 
 | Name | Description |
 |---|---|
-| `DiscoverSpecTypes` | Scan an assembly for Spec subclasses and register them. Class name minus "Spec", lowercased, becomes the type key. Safe to call multiple times (idempotent, later calls overwrite). Call this after loading mod assemblies so mod spec types are found. |
+| `DiscoverSpecTypes` | Scan an assembly for [Spec](/reference/api/specs/spec/) subclasses and register them. Class name minus "[Spec](/reference/api/specs/spec/)", lowercased, becomes the type key. Safe to call multiple times (idempotent, later calls overwrite). Call this after loading mod assemblies so mod spec types are found. |
 | `DiscoverAllSpecTypes` | Scan all currently loaded assemblies for spec types. Useful after mod DLLs are loaded. |
 | `RegisterType``1` | Register a spec type manually. For edge cases where the naming convention doesn't fit. |
 | `Register` | Register a loaded spec into the registry. |

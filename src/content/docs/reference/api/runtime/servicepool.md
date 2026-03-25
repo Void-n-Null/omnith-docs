@@ -8,7 +8,7 @@ sidebar:
 
 `Omnith.Ecs`
 
-Internal composition root for the Omnith runtime. Resolves the full dependency graph of stores and systems at startup via constructor injection. Never exposed to systems, stores, or mods. OmnithRuntime is the only caller. Two registration paths: Provide<T>(instance) — pre-constructed objects (World, EventBus, TerrainData, etc.) DiscoverAndResolve() — scans assemblies for [OmnithStore] and [OmnithSystem], topologically sorts, and constructs via reflection. After resolution the pool freezes. No further registration is accepted.
+Internal composition root for the [Omnith](/index/) runtime. Resolves the full dependency graph of stores and systems at startup via constructor injection. Never exposed to systems, stores, or mods. OmnithRuntime is the only caller. Two registration paths: Provide<T>(instance) — pre-constructed objects ([World](/reference/api/runtime/world/), [EventBus](/reference/api/runtime/eventbus/), TerrainData, etc.) DiscoverAndResolve() — scans assemblies for [OmnithStore] and [OmnithSystem], topologically sorts, and constructs via reflection. After resolution the pool freezes. No further registration is accepted.
 
 ## Properties
 

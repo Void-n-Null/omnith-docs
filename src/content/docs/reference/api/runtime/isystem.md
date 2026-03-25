@@ -8,7 +8,7 @@ sidebar:
 
 `Omnith.Ecs`
 
-A named, ordered, rate-limited system that operates on the ECS world. Systems can be tick-based, event-driven, or both. Dependencies are injected via constructor (resolved by ServicePool). Name, Order, and TickRate are read from the [OmnithSystem] attribute. Systems only need to implement Enabled, Register(), and Tick().
+A named, ordered, rate-limited system that operates on the ECS world. [Systems](/csharp/systems/) can be tick-based, event-driven, or both. Dependencies are injected via constructor (resolved by [ServicePool](/reference/api/runtime/servicepool/)). Name, Order, and TickRate are read from the [OmnithSystem] attribute. [Systems](/csharp/systems/) only need to implement Enabled, Register(), and Tick().
 
 ## Properties
 

@@ -8,7 +8,7 @@ sidebar:
 
 `Omnith.Ecs`
 
-Static generic type that holds the ID for component type T. First access to ComponentMeta<T>.Id triggers registration.
+Static generic type that holds the ID for component type T. First access to [ComponentMeta](/reference/api/runtime/componentmeta/)<T>.Id triggers registration.
 
 ## Fields
 
