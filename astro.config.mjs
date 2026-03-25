@@ -36,12 +36,13 @@ export default defineConfig({
 				{
 					label: 'Reference',
 					items: [
-						{ label: 'ECS', slug: 'reference/ecs' },
+						{ label: 'ECS Overview', slug: 'reference/ecs' },
 						{ label: 'API Index', slug: 'reference/api-index' },
-						{
-							label: 'API',
-							autogenerate: { directory: 'reference/api' },
-						},
+						{ label: 'Specs', autogenerate: { directory: 'reference/api/specs' } },
+						{ label: 'Systems', autogenerate: { directory: 'reference/api/systems' } },
+						{ label: 'Stores', autogenerate: { directory: 'reference/api/stores' } },
+						{ label: 'Components', autogenerate: { directory: 'reference/api/components' } },
+						{ label: 'Runtime', autogenerate: { directory: 'reference/api/runtime' } },
 					],
 				},
 			],

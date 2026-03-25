@@ -5,96 +5,71 @@ description: Auto-generated from XML doc comments in omnith.dll
 
 Generated from `sdk/omnith.xml`. Rebuild with `bun run generate-api`.
 
-## Data Layer
+## Specs
 
-- [`ColorRangeConfig`](/reference/api/colorrangeconfig/)
-- [`ComponentFactoryRegistry`](/reference/api/componentfactoryregistry/)
-- [`CoreComponentFactories`](/reference/api/corecomponentfactories/)
-- [`EntitySpec`](/reference/api/entityspec/)
-- [`ModContext`](/reference/api/modcontext/)
-- [`ModDependencyResolver`](/reference/api/moddependencyresolver/)
-- [`ModIssue`](/reference/api/modissue/)
-- [`ModIssueSeverity`](/reference/api/modissueseverity/)
-- [`ModLoader`](/reference/api/modloader/)
-- [`ModLoadResult`](/reference/api/modloadresult/)
-- [`ModManifest`](/reference/api/modmanifest/)
-- [`ModOrder`](/reference/api/modorder/)
-- [`NeedsSpec`](/reference/api/needsspec/)
-- [`OmnithMod`](/reference/api/omnithmod/)
-- [`ResourceRegistry`](/reference/api/resourceregistry/)
-- [`Spec`](/reference/api/spec/)
-- [`SpecFieldInfo`](/reference/api/specfieldinfo/)
-- [`SpecIdAttribute`](/reference/api/specidattribute/)
-- [`SpecLoader`](/reference/api/specloader/)
-- [`SpecRefResolver`](/reference/api/specrefresolver/)
-- [`SpecRegistry`](/reference/api/specregistry/)
-- [`SpecTypeCache`](/reference/api/spectypecache/)
-- [`SpriteConfig`](/reference/api/spriteconfig/)
-- [`TerrainGenSpec`](/reference/api/terraingenspec/)
-- [`WorldSpec`](/reference/api/worldspec/)
+Data-driven templates loaded from .data files
 
-## Omnith.Data.CoreComponentFactories
+- [`EntitySpec`](/reference/api/specs/entityspec/) -- Base spec for any spawnable entity.
+- [`NeedsSpec`](/reference/api/specs/needsspec/) -- Needs profile.
+- [`Spec`](/reference/api/specs/spec/) -- Base class for all data specifications (definitions).
+- [`TerrainGenSpec`](/reference/api/specs/terraingenspec/) -- Terrain generation parameters.
+- [`WorldSpec`](/reference/api/specs/worldspec/) -- Top-level world configuration.
 
-- [`MovementResolver`](/reference/api/movementresolver/)
+## Systems
 
-## Omnith.Data.ResourceRegistry
+Per-frame logic that operates on entities
 
-- [`ResourceEntry`](/reference/api/resourceentry/)
+- [`BounceSystem`](/reference/api/systems/bouncesystem/) -- Reverses velocity when entities hit screen edges.
+- [`GodCursorSystem`](/reference/api/systems/godcursorsystem/) -- Handles god-mode cursor input.
+- [`MovementSystem`](/reference/api/systems/movementsystem/) -- Applies velocity to position.
+- [`PathfindingSystem`](/reference/api/systems/pathfindingsystem/) -- Computes A* paths when an entity's PathTarget changes.
+- [`PathMovementSystem`](/reference/api/systems/pathmovementsystem/) -- Moves entities along computed paths.
 
-## ECS
+## Stores
 
-- [`Archetype`](/reference/api/archetype/)
-- [`ArchetypeSignature`](/reference/api/archetypesignature/)
-- [`Blueprint`](/reference/api/blueprint/)
-- [`Column`1`](/reference/api/column1/)
-- [`ComponentMeta`](/reference/api/componentmeta/)
-- [`ComponentMeta`1`](/reference/api/componentmeta1/)
-- [`DynamicResolver`1`](/reference/api/dynamicresolver1/)
-- [`Entity`](/reference/api/entity/)
-- [`EntityRecord`](/reference/api/entityrecord/)
-- [`EntityStore`](/reference/api/entitystore/)
-- [`EventBus`](/reference/api/eventbus/)
-- [`GridPosition`](/reference/api/gridposition/)
-- [`IColumn`](/reference/api/icolumn/)
-- [`IComponentResolver`](/reference/api/icomponentresolver/)
-- [`ISystem`](/reference/api/isystem/)
-- [`OmnithStoreAttribute`](/reference/api/omnithstoreattribute/)
-- [`OmnithSystemAttribute`](/reference/api/omnithsystemattribute/)
-- [`PathFollower`](/reference/api/pathfollower/)
-- [`PathTarget`](/reference/api/pathtarget/)
-- [`Position`](/reference/api/position/)
-- [`RectInt`](/reference/api/rectint/)
-- [`ServicePool`](/reference/api/servicepool/)
-- [`SpawnTable`](/reference/api/spawntable/)
-- [`SpecRef`](/reference/api/specref/)
-- [`Sprite`](/reference/api/sprite/)
-- [`StaticResolver`1`](/reference/api/staticresolver1/)
-- [`Store`1`](/reference/api/store1/)
-- [`SystemAttributeCache`](/reference/api/systemattributecache/)
-- [`SystemRate`](/reference/api/systemrate/)
-- [`SystemRunner`](/reference/api/systemrunner/)
-- [`Vec2Int`](/reference/api/vec2int/)
-- [`Velocity`](/reference/api/velocity/)
-- [`World`](/reference/api/world/)
+External data storage outside the ECS
 
-## Omnith.Ecs.Systems
+- [`PathStore`](/reference/api/stores/pathstore/) -- External storage for computed paths.
 
-- [`BounceSystem`](/reference/api/bouncesystem/)
-- [`GodCursorSystem`](/reference/api/godcursorsystem/)
-- [`MovementSystem`](/reference/api/movementsystem/)
-- [`PathfindingSystem`](/reference/api/pathfindingsystem/)
-- [`PathMovementSystem`](/reference/api/pathmovementsystem/)
+## Components
 
-## Core
+ECS component structs attached to entities
 
-- [`Log`](/reference/api/log/)
+- [`GridPosition`](/reference/api/components/gridposition/) -- Tile-space position on the grid.
+- [`PathFollower`](/reference/api/components/pathfollower/) -- Pathfinding state.
+- [`PathTarget`](/reference/api/components/pathtarget/) -- Where this entity wants to pathfind to.
+- [`Position`](/reference/api/components/position/) -- 2D position in world space (pixels).
+- [`SpecRef`](/reference/api/components/specref/) -- Back-reference to the spec this entity was spawned from.
+- [`Sprite`](/reference/api/components/sprite/) -- Visual data for rendering.
+- [`Velocity`](/reference/api/components/velocity/) -- 2D velocity in units per second.
 
-## Simulation
+## Runtime
 
-- [`CellGrid`](/reference/api/cellgrid/)
-- [`Pathfinding`](/reference/api/pathfinding/)
-- [`PathStore`](/reference/api/pathstore/)
-- [`TerrainData`](/reference/api/terraindata/)
-- [`TileData`](/reference/api/tiledata/)
-- [`WorldBuilder`](/reference/api/worldbuilder/)
+Core engine types for modding and ECS
+
+- [`Blueprint`](/reference/api/runtime/blueprint/) -- A template for spawning entities.
+- [`Column`1`](/reference/api/runtime/column1/) -- Strongly-typed contiguous storage for a single component type.
+- [`ComponentFactoryRegistry`](/reference/api/runtime/componentfactoryregistry/) -- Maps string keys to component resolver factories.
+- [`ComponentMeta`](/reference/api/runtime/componentmeta/) -- Assigns a unique integer ID to each component type at runtime.
+- [`ComponentMeta`1`](/reference/api/runtime/componentmeta1/) -- Static generic type that holds the ID for component type T.
+- [`DynamicResolver`1`](/reference/api/runtime/dynamicresolver1/) -- Dynamic resolver: calls a function with an RNG to produce the value.
+- [`Entity`](/reference/api/runtime/entity/) -- A handle to an entity in the world.
+- [`EventBus`](/reference/api/runtime/eventbus/) -- Synchronous typed event bus.
+- [`IColumn`](/reference/api/runtime/icolumn/) -- Type-erased interface for component columns so archetypes can hold mixed types.
+- [`IComponentResolver`](/reference/api/runtime/icomponentresolver/) -- Resolver that provides a component value at spawn time.
+- [`ISystem`](/reference/api/runtime/isystem/) -- A named, ordered, rate-limited system that operates on the ECS world.
+- [`Log`](/reference/api/runtime/log/) -- Static log router.
+- [`ModContext`](/reference/api/runtime/modcontext/) -- Everything a mod needs access to.
+- [`ModManifest`](/reference/api/runtime/modmanifest/) -- Metadata from a mod's mod.
+- [`OmnithMod`](/reference/api/runtime/omnithmod/) -- Base class for mod entry points.
+- [`ResourceRegistry`](/reference/api/runtime/resourceregistry/) -- Manages game resources (sprites, audio, etc.
+- [`ServicePool`](/reference/api/runtime/servicepool/) -- Internal composition root for the Omnith runtime.
+- [`SpawnTable`](/reference/api/runtime/spawntable/) -- Weighted random selection of blueprints.
+- [`SpecIdAttribute`](/reference/api/runtime/specidattribute/) -- Marks a string property as a spec ID reference.
+- [`SpecLoader`](/reference/api/runtime/specloader/) -- Loads .
+- [`SpecRegistry`](/reference/api/runtime/specregistry/) -- Central registry for all loaded specs.
+- [`StaticResolver`1`](/reference/api/runtime/staticresolver1/) -- Static resolver: always applies the same value.
+- [`Store`1`](/reference/api/runtime/store1/) -- Generic side-table for variable-length or reference-type data that doesn't fit in ECS struct components.
+- [`SystemRunner`](/reference/api/runtime/systemrunner/) -- Manages registered systems: sorts by order, tracks per-system tick accumulators, calls Register for event subscriptions, and ticks each system on schedule.
+- [`World`](/reference/api/runtime/world/) -- The ECS world.
 
