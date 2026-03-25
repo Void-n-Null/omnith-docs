@@ -35,7 +35,14 @@ export default defineConfig({
 				},
 				{
 					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					items: [
+						{ label: 'ECS', slug: 'reference/ecs' },
+						{ label: 'API Index', slug: 'reference/api-index' },
+						{
+							label: 'API',
+							autogenerate: { directory: 'reference/api' },
+						},
+					],
 				},
 			],
 		}),
