@@ -215,28 +215,42 @@ async function main() {
 
     for (const page of pages) {
       const slug = page.shortName.toLowerCase().replace(/[<>`,]/g, '');
+      const isSpec = cat === 'specs';
+
       let md = `---\ntitle: ${page.shortName}\ndescription: "${page.summary.replace(/"/g, '\\"').substring(0, 160)}"\nsidebar:\n  badge:\n    text: ${meta.label.slice(0, -1)}\n---\n\n`;
 
       md += `\`${page.ns}\`\n\n`;
       if (page.summary) md += `${page.summary}\n\n`;
 
+      // Specs: show fields only (the data shape matters, not the API surface)
+      // Everything else: show properties, methods, and fields
       const props = page.properties.filter(p => p.summary);
       if (props.length > 0) {
-        md += `## Properties\n\n| Name | Description |\n|---|---|\n`;
-        for (const p of props) md += `| \`${p.name}\` | ${p.summary.replace(/\n/g, ' ')} |\n`;
-        md += '\n';
+        if (isSpec) {
+          md += `## Fields\n\n| Name | Description |\n|---|---|\n`;
+          for (const p of props) md += `| \`${p.name}\` | ${p.summary.replace(/\n/g, ' ')} |\n`;
+          md += '\n';
+        } else {
+          md += `## Properties\n\n| Name | Description |\n|---|---|\n`;
+          for (const p of props) md += `| \`${p.name}\` | ${p.summary.replace(/\n/g, ' ')} |\n`;
+          md += '\n';
+        }
       }
 
-      const methods = page.methods.filter(m => m.summary);
-      if (methods.length > 0) {
-        md += `## Methods\n\n| Name | Description |\n|---|---|\n`;
-        for (const m of methods) md += `| \`${m.name}\` | ${m.summary.replace(/\n/g, ' ')} |\n`;
-        md += '\n';
+      if (!isSpec) {
+        const methods = page.methods.filter(m => m.summary);
+        if (methods.length > 0) {
+          md += `## Methods\n\n| Name | Description |\n|---|---|\n`;
+          for (const m of methods) md += `| \`${m.name}\` | ${m.summary.replace(/\n/g, ' ')} |\n`;
+          md += '\n';
+        }
       }
 
       const fields = page.fields.filter(f => f.summary && !f.name.startsWith('_'));
       if (fields.length > 0) {
-        md += `## Fields\n\n| Name | Description |\n|---|---|\n`;
+        const heading = isSpec ? (props.length > 0 ? '' : '## Fields\n\n') : '## Fields\n\n';
+        if (heading) md += heading;
+        if (heading) md += `| Name | Description |\n|---|---|\n`;
         for (const f of fields) md += `| \`${f.name}\` | ${f.summary.replace(/\n/g, ' ')} |\n`;
         md += '\n';
       }

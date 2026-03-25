@@ -1,6 +1,6 @@
 ---
 title: Spec
-description: "Base class for all data specifications (definitions). A Spec is a named, inheritable template loaded from .data files. Specs define WHAT something is. They live"
+description: "Base class for all data specifications. A spec is a named template loaded from .data files at startup. Specs are immutable configuration -- they define what som"
 sidebar:
   badge:
     text: Spec
@@ -8,23 +8,14 @@ sidebar:
 
 `Omnith.Data`
 
-Base class for all data specifications (definitions). A Spec is a named, inheritable template loaded from .data files. Specs define WHAT something is. They live in registries and are loaded once at startup. They are not ECS entities -- they're the configuration data that systems and blueprints consume. The spec type key used in .data files (the "type" field) is derived automatically from the class name: strip "Spec", lowercase. EntitySpec → "entity" NeedsSpec → "needs" Supports mixin inheritance via extends (single string or array): "extends": "humanoid" "extends": ["living", "mobile", "destructible"]
+Base class for all data specifications. A spec is a named template loaded from .data files at startup. Specs are immutable configuration -- they define what something is, not runtime state. The type key in .data files is derived from the class name by stripping "Spec" and lowercasing (EntitySpec = "entity", TerrainGenSpec = "terrainGen"). Specs support single or multi-parent inheritance via the extends field, mod patching (same ID = merge), and full replacement via the replace flag.
 
-## Properties
-
-| Name | Description |
-|---|---|
-| `Id` | Unique identifier. Used for lookup, inheritance, and cross-references. |
-| `Extends` | Parent spec IDs to inherit from. Supports single string or array in JSON. Parsed by SpecLoader -- stored as a list internally. |
-| `Abstract` | If true, this spec is a template only and won't produce anything directly. |
-| `Replace` | If true, this spec definition completely replaces any existing spec with the same ID instead of merging. Used by mods that need to redefine a spec from scratch (new extends, new components, everything). Parsed by SpecLoader; checked by SpecRegistry.Register(). |
-
-## Methods
+## Fields
 
 | Name | Description |
 |---|---|
-| `MergeFrom` | Merge a patch onto this spec (mod overriding the same ID). Non-default fields on override this spec's values. Override in subclasses for custom merge semantics (e.g. dictionary entry-level merge, additive list merge). |
-| `InheritFrom` | Inherit fields from a parent spec (extends keyword). Only fills fields on this spec that are still at their default/empty value. Override in subclasses for custom inheritance semantics. |
-| `ReflectionMerge` | Reflection-based field merge used by the default MergeFrom/InheritFrom. Skips properties declared on itself (Id, Extends, Abstract). |
-| `IsDefaultOrEmpty` | Returns true if is null, a default value type, or an empty array. Used by to detect unset fields. |
+| `Id` | Unique identifier, automatically qualified with the mod's namespace (e.g. "core:goblin"). |
+| `Extends` | Parent spec IDs to inherit from. Accepts a single string or JSON array. Child fields override parent fields; components merge additively. |
+| `Abstract` | If true, this spec is a template only and cannot be spawned or used directly. Exists solely as an inheritance target. |
+| `Replace` | If true, completely replaces any existing spec with the same ID instead of merging onto it. Used when a mod needs to redefine a spec from scratch. |
 

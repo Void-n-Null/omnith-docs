@@ -1,6 +1,6 @@
 ---
 title: TerrainGenSpec
-description: "Terrain generation parameters. Controls noise-based world generation: scale, thresholds, spawn clearing, and layer configuration. Auto-registered as \"terrainGe"
+description: "Terrain generation parameters. Controls noise-based world generation including grid dimensions, mountain distribution, and spawn clearing. Type key: \"terrainGe"
 sidebar:
   badge:
     text: Spec
@@ -8,9 +8,9 @@ sidebar:
 
 `Omnith.Data`
 
-Terrain generation parameters. Controls noise-based world generation: scale, thresholds, spawn clearing, and layer configuration. Auto-registered as "terrainGen" in .data files.
+Terrain generation parameters. Controls noise-based world generation including grid dimensions, mountain distribution, and spawn clearing. Type key: "terrainGen"
 
-## Properties
+## Fields
 
 | Name | Description |
 |---|---|

@@ -1,6 +1,6 @@
 ---
 title: NeedsSpec
-description: "Needs profile. IS a Spec: can be defined standalone, referenced by ID, or defined inline inside an EntitySpec. Auto-registered as \"needs\" in .data files."
+description: "Needs profile defining how quickly an entity's needs decay over time. Can be defined standalone and referenced by ID, or inlined inside an EntitySpec. Type key:"
 sidebar:
   badge:
     text: Spec
@@ -8,5 +8,13 @@ sidebar:
 
 `Omnith.Data`
 
-Needs profile. IS a Spec: can be defined standalone, referenced by ID, or defined inline inside an EntitySpec. Auto-registered as "needs" in .data files.
+Needs profile defining how quickly an entity's needs decay over time. Can be defined standalone and referenced by ID, or inlined inside an EntitySpec. Type key: "needs"
+
+## Fields
+
+| Name | Description |
+|---|---|
+| `HungerRate` | Rate at which hunger increases per tick. Higher = gets hungry faster. |
+| `RestRate` | Rate at which rest need increases per tick. Higher = tires faster. |
+| `SocialRate` | Rate at which social need increases per tick. Higher = gets lonely faster. |
 

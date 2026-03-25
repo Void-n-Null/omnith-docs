@@ -1,6 +1,6 @@
 ---
 title: WorldSpec
-description: "Top-level world configuration. Points to the specs that define how the world is generated and populated. Auto-registered as \"world\" in .data files."
+description: "World configuration. Controls which terrain generator to use, how many entities to spawn, and what to spawn them as. Type key: \"world\""
 sidebar:
   badge:
     text: Spec
@@ -8,13 +8,13 @@ sidebar:
 
 `Omnith.Data`
 
-Top-level world configuration. Points to the specs that define how the world is generated and populated. Auto-registered as "world" in .data files.
+World configuration. Controls which terrain generator to use, how many entities to spawn, and what to spawn them as. Type key: "world"
 
-## Properties
+## Fields
 
 | Name | Description |
 |---|---|
-| `TerrainGen` | ID of the TerrainGenSpec to use for terrain generation. |
-| `AgentCount` | Number of initial agents to spawn. |
-| `AgentSpec` | Entity spec ID to spawn as agents. |
+| `TerrainGen` | TerrainGenSpec ID to use for terrain generation. Auto-qualified with the current mod's namespace. |
+| `AgentCount` | Number of entities to spawn at world creation. |
+| `AgentSpec` | EntitySpec ID to spawn as the initial population. Auto-qualified with the current mod's namespace. |
 

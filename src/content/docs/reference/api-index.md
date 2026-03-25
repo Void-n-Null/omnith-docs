@@ -9,11 +9,11 @@ Generated from `sdk/omnith.xml`. Rebuild with `bun run generate-api`.
 
 Data-driven templates loaded from .data files
 
-- [`EntitySpec`](/reference/api/specs/entityspec/) -- Base spec for any spawnable entity.
-- [`NeedsSpec`](/reference/api/specs/needsspec/) -- Needs profile.
-- [`Spec`](/reference/api/specs/spec/) -- Base class for all data specifications (definitions).
+- [`EntitySpec`](/reference/api/specs/entityspec/) -- Defines a spawnable entity.
+- [`NeedsSpec`](/reference/api/specs/needsspec/) -- Needs profile defining how quickly an entity's needs decay over time.
+- [`Spec`](/reference/api/specs/spec/) -- Base class for all data specifications.
 - [`TerrainGenSpec`](/reference/api/specs/terraingenspec/) -- Terrain generation parameters.
-- [`WorldSpec`](/reference/api/specs/worldspec/) -- Top-level world configuration.
+- [`WorldSpec`](/reference/api/specs/worldspec/) -- World configuration.
 
 ## Systems
 
